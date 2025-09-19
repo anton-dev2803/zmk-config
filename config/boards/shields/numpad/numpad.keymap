@@ -25,7 +25,7 @@
                 &kp KP_N0       &none           &kp KP_DOT       &kp KP_ENTER
                 &none           &none           &none            &kp KP_ENTER
             >;
-            sensor_bindings = <&inc_dec_kp &kp VOL_UP &kp VOL_DOWN>;
+            sensor-bindings = <&inc_dec_kp &kp VOL_UP &kp VOL_DOWN>;
         };
 
         bt_layer {

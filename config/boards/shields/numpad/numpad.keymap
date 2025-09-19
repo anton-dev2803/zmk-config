@@ -21,8 +21,9 @@
                 // R5
                 &none           &none           &none           &kp KP_ENTER // Encoder switch
             >;
-            encoder_bindings = <&inc_kp &kp VOL_UP>, <&dec_kp &kp VOL_DOWN>;
+           
         };
+        encoder_bindings = <&inc_kp &kp VOL_UP>, <&dec_kp &kp VOL_DOWN>;
 
         bt_layer {
             bindings = <
@@ -39,7 +40,7 @@
                 // R5
                 &none           &none           &none           &none // Encoder switch
             >;
-            // ...no encoder bindings in bt_layer...
+            
         };
     };
 };

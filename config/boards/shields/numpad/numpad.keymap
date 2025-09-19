@@ -2,55 +2,38 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
- / {
+/ {
     keymap {
-        compatible = "zmk,keymap"; 
-
+        compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-
-                &mo 1           &kp KP_SLASH    &kp KP_ASTERISK   &kp KP_MINUS
-                
-                &kp KP_N7       &kp KP_N8       &kp KP_N9       
-
-                
-                &kp KP_N4       &kp KP_N5       &kp KP_N6       &kp KP_PLUS
-
-                
-                &kp KP_N1       &kp KP_N2       &kp KP_N3       
-
-                
-                &kp KP_N0       &kp KP_DOT      &kp KP_ENTER
-
-                
-                
+                // R0 (4)
+                &mo 1           &kp KP_SLASH    &kp KP_ASTERISK  &kp KP_MINUS
+                // R1 (3 + filler)
+                &kp KP_N7       &kp KP_N8       &kp KP_N9        &none
+                // R2 (4)
+                &kp KP_N4       &kp KP_N5       &kp KP_N6        &kp KP_PLUS
+                // R3 (3 + filler)
+                &kp KP_N1       &kp KP_N2       &kp KP_N3        &none
+                // R4 (3 + filler)
+                &kp KP_N0       &kp KP_DOT      &kp KP_ENTER     &none
             >;
         };
 
         bt_layer {
             bindings = <
-
-                &none           &none           &none           &bootloader
-                
-                &none           &none           &none      
-
-                
-                &none           &none           &bt BT_CLR      &none
-
-                
-                &b1 BT_SEL 0    &b1 BT_SEL 1    &b1 BT_SEL 2      
-
-                
-                &none           &none           &none
-
-
-
-
-
-            >:
-
-
-        }:
+                // R0
+                &none           &none           &none            &bootloader
+                // R1
+                &none           &none           &none            &none
+                // R2
+                &none           &none           &bt BT_CLR       &none
+                // R3
+                &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2     &none
+                // R4
+                &none           &none           &none            &none
+            >;
+        };
     };
 };

@@ -17,7 +17,7 @@
                 // R3 
                 &kp KP_N1       &kp KP_N2       &kp KP_N3        
                 // R4 
-                &kp KP_N0       &kp KP_DOT      &kp KP_ENTER     
+                &kp KP_N0                       &kp KP_DOT      &kp KP_ENTER     
             >;
         };
 
@@ -32,7 +32,7 @@
                 // R3
                 &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2     
                 // R4
-                &none           &none           &none            
+                &none                           &none           &none            
             >;
         };
     };

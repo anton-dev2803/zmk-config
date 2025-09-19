@@ -3,6 +3,15 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
+
+&encoder {
+    status = "okay";
+};
+
+&sensors {
+    sensors = <&encoder>;
+};
+
 / {
     keymap {
         compatible = "zmk,keymap";

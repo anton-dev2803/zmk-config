@@ -32,19 +32,17 @@
         >;
     };
 
-    encoder0: encoder{
+    encoder: encoder {
         compatible = "alps,ec11";
-        label = "Rotary Encoder";
-        a-gpios = <&pro_micro 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        b-gpios = <&pro_micro 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        steps = <20>; // Set to your encoder's pulses per rotation
+        a-gpios = <&pro_micro 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        b-gpios = <&pro_micro 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        steps = <20>;
         status = "okay";
     };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
-        sensors = <&encoder0>;
-        triggers-per-rotation = <4>; // Adjust as needed
+        triggers-per-rotation = <20>;
     };
 
     chosen {

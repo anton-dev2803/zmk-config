@@ -44,4 +44,10 @@
         sensors = <&encoder>;
         triggers-per-rotation = <4>;
     };
+
+    
+    chosen {
+        zmk,kscan = &default_kscan;
+        /* zmk,matrix-transform = &default_transform;   */
+    };
 };

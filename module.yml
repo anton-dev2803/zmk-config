@@ -1,3 +1,0 @@
-name: zmk-config-rotate
-build:
-  cmake: .

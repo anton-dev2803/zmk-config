@@ -50,4 +50,9 @@
         zmk,kscan = &default_kscan;
         /* zmk,matrix-transform = &default_transform;   */
     };
+
+
+    &nice_view_display {
+    rotation = <180>;
+    };
 };

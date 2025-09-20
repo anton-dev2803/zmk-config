@@ -10,7 +10,7 @@
         compatible = "zmk,keymap";
 
         default_layer {
-
+            display-name = "Base";
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
 
             bindings = <
@@ -25,6 +25,7 @@
         };
 
         bt_layer {
+            display-name = "Bluetooth";
             bindings = <
                 &none           &none           &none            &bootloader
                 &none           &none           &none            

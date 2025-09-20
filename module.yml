@@ -1,4 +1,3 @@
 name: zmk-config-rotate
 build:
   cmake: .
-  kconfig: Kconfig

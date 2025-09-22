@@ -1,65 +1,38 @@
-# Copyright (c) 2025
-# SPDX-License-Identifier: MIT
+# config/boards/shields/custom_view/Kconfig.defconfig
 
-if SHIELD_CUSTOM_VIEW
-
-# --- LVGL/Display Defaults passend zum 160x68 Memory-LCD ---------------------
-
+# LVGL/Display Defaults passend zum 160x68 Memory-LCD
 config LV_Z_VDB_SIZE
     default 100
-
 config LV_DPI_DEF
     default 161
-
 config LV_Z_BITS_PER_PIXEL
     default 1
-
 choice LV_COLOR_DEPTH
     default LV_COLOR_DEPTH_1
 endchoice
 
-# Eigene Display-Workqueue (wie beim nice_view)
 choice ZMK_DISPLAY_WORK_QUEUE
     default ZMK_DISPLAY_WORK_QUEUE_DEDICATED
 endchoice
 
-# Wir nutzen einen "Custom" Status Screen
 choice ZMK_DISPLAY_STATUS_SCREEN
     default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
 endchoice
 
-# Etwas mehr LVGL Heap für unseren Screen
 config LV_Z_MEM_POOL_SIZE
     default 4096 if ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
 
-# Aktiviert unseren Custom-Status-Screen und das zugehörige Widget
+# Unser Custom-Screen → impliziert das Widget (ohne SHIELD-Abhängigkeit)
 config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
     imply CUSTOM_VIEW_WIDGET_STATUS
 
-# ---- Dein Widget-Switch & LVGL-Fonts/Funktionen -----------------------------
-
-config CUSTOM_VIEW_WIDGET_STATUS
-    bool "Custom view status widget"
-    select LV_USE_IMG
-    select LV_USE_CANVAS
-    select LV_FONT_MONTSERRAT_16
-
-# Optional: invertierte Farblogik (falls du sie im Code nutzt)
-config CUSTOM_VIEW_WIDGET_INVERTED
-    bool "Invert custom status widget colors"
-
-# Nur auf Zentral/Single-Board zusätzliche Fonts & WPM aktivieren
-if !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
+# Fonts & WPM-Unterstützung bequem zusammen mit dem Widget aktivieren
 config CUSTOM_VIEW_WIDGET_STATUS
     select LV_FONT_MONTSERRAT_18
     select LV_FONT_MONTSERRAT_14
     select LV_FONT_UNSCII_8
     select ZMK_WPM
-endif # !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
 
-# Falls der eingebaute (Built-in) Screen irgendwo noch gewählt wird,
-# stelle sicher, dass eine größere Font verfügbar ist:
+# Falls der Built-in-Screen gewählt wird, größere Font sicherstellen
 config ZMK_DISPLAY_STATUS_SCREEN_BUILT_IN
     select LV_FONT_MONTSERRAT_26
-
-endif # SHIELD_CUSTOM_VIEW

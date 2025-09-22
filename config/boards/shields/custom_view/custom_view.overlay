@@ -17,6 +17,6 @@
 
 / {
     chosen {
-        zephyr,display = &custome_view;
+        zephyr,display = &custom_view;
     };
 };

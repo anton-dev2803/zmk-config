@@ -1,6 +1,33 @@
 
-# Copyright (c) 2022 The ZMK Contributors
-# SPDX-License-Identifier: MIT
+menu "Custom View (status screen)"
+depends on SHIELD_CUSTOM_VIEW
 
-config SHIELD_NICE_VIEW
-    def_bool $(shields_list_contains,custom_view)
+config CUSTOM_VIEW_SHOW_BATTERY
+    bool "Show battery"
+    default y
+
+config CUSTOM_VIEW_SHOW_OUTPUT
+    bool "Show USB/BLE icon"
+    default y
+
+config CUSTOM_VIEW_SHOW_PROFILES
+    bool "Show BLE profiles"
+    default y
+
+config CUSTOM_VIEW_SHOW_LAYER
+    bool "Show layer label"
+    default y
+
+config CUSTOM_VIEW_SHOW_WPM
+    bool "Show WPM number"
+    default y
+
+config CUSTOM_VIEW_SHOW_WPM_SPARKLINE
+    bool "Show WPM sparkline"
+    depends on CUSTOM_VIEW_SHOW_WPM
+    default y
+
+config CUSTOM_VIEW_ROTATE_CANVAS
+    bool "Rotate 68x68 canvases (legacy portrait layout)"
+    default n
+endmenu

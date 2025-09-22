@@ -52,7 +52,5 @@
     };
 
 
-    &nice_view_display {
-    rotation = <90>;
-    };
+
 };

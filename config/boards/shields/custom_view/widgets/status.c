@@ -412,6 +412,19 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     widget_wpm_status_init();
 #endif
 
+#if IS_ENABLED(CONFIG_CUSTOM_VIEW_SHOW_BATTERY)
+    battery_status_update_cb(battery_status_get_state(NULL));
+#endif
+#if IS_ENABLED(CONFIG_CUSTOM_VIEW_SHOW_OUTPUT) || IS_ENABLED(CONFIG_CUSTOM_VIEW_SHOW_PROFILES)
+    output_status_update_cb(output_status_get_state(NULL));
+#endif
+#if IS_ENABLED(CONFIG_CUSTOM_VIEW_SHOW_LAYER)
+    layer_status_update_cb(layer_status_get_state(NULL));
+#endif
+#if IS_ENABLED(CONFIG_CUSTOM_VIEW_SHOW_WPM)
+    wpm_status_update_cb(wpm_status_get_state(NULL));
+#endif
+
     return 0;
 }
 

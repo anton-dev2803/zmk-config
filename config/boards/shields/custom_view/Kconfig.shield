@@ -1,6 +1,8 @@
-
 menu "Custom View (status screen)"
-depends on SHIELD_CUSTOM_VIEW
+# (optional) keine Abhängigkeit nötig; so ist es überall nutzbar
+config CUSTOM_VIEW_WIDGET_STATUS
+    bool "Enable custom view status widget"
+    default y
 
 config CUSTOM_VIEW_SHOW_BATTERY
     bool "Show battery"

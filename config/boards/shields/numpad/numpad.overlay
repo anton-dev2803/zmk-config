@@ -5,16 +5,19 @@
         compatible = "zmk,kscan-gpio-matrix";
         label = "default_kscan";
         diode-direction = "col2row";
+
         row-gpios = <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+
         col-gpios = <&pro_micro 6 (GPIO_ACTIVE_HIGH)>,
                     <&pro_micro 7 (GPIO_ACTIVE_HIGH)>,
                     <&pro_micro 8 (GPIO_ACTIVE_HIGH)>,
                     <&pro_micro 9 (GPIO_ACTIVE_HIGH)>;
+        status = "okay";
     };
 
     default_transform: matrix_transform {
@@ -29,6 +32,7 @@
             RC(4,0)         RC(4,2) RC(4,3)
                                     RC(5,3)
         >;
+        status = "okay";
     };
 
     encoder: encoder {
@@ -43,14 +47,47 @@
         compatible = "zmk,keymap-sensors";
         sensors = <&encoder>;
         triggers-per-rotation = <4>;
+        status = "okay";
     };
 
-    
+    /* --- Wake from sleep using a normal matrix switch (Method A: col2row, monitor column P0.06) --- */
+
+    /* 1) A gpio-keys input that watches the *column* line on P0.06.
+     *    Use pull-up + ACTIVE_LOW because in col2row a press pulls the column low.
+     */
+    wake_keys: gpio_keys {
+        compatible = "gpio-keys";
+
+        wake: wake_key {
+            gpios = <&pro_micro 6 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            label = "Matrix Wake (col P0.06)";
+        };
+        status = "okay";
+    };
+
+    /* 2) Mark that key as a wake source; bias the corresponding *row* low before sleep
+     *    so the column actually sees a transition while kscan is off.
+     *    Replace the ROW below if your chosen switch is on a different row.
+     *    Here we bias ROW on pro_micro P0.10 as an example.
+     */
+    wake_trigger: gpio-key-wakeup-trigger {
+        compatible = "zmk,gpio-key-wakeup-trigger";
+        trigger = <&wake>;
+        wakeup-source;
+        /* If your chosen key’s row isn’t P0.10, change this line accordingly. */
+        extra-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
+        status = "okay";
+    };
+
+    /* 3) (Optional) Allow wake from *soft off* as well */
+    softoff_ws: soft-off-wakeup-sources {
+        compatible = "zmk,soft-off-wakeup-sources";
+        wakeup-sources = <&wake_trigger>;
+        status = "okay";
+    };
+
     chosen {
         zmk,kscan = &default_kscan;
-        /* zmk,matrix-transform = &default_transform;   */
+        /* zmk,matrix-transform = &default_transform; */
     };
-
-
-
 };
